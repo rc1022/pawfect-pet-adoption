@@ -27,7 +27,7 @@ const Index = () => {
   }, []);
 
   return (
-    <View className="flex-1 bg-[#F6EFE7]">
+    <View className="flex-1 bg-primary">
       {showFirst && <SplashScreen fadeAnim={splashAnim} />}
       <LandingScreen fadeAnim={landingAnim} />
     </View>
