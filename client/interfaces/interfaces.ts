@@ -31,3 +31,10 @@ export interface Shelter {
     about:string;
     donate:string;
 }
+
+export interface Message {
+    _id: number;
+    text: string;
+    createdAt: Date;
+    sender: string;
+}

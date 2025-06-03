@@ -131,7 +131,10 @@ const pet = () => {
           >{pet.name} </Text>
 
             <TouchableOpacity 
-              onPress={() => Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy)}
+              onPress={() => {
+                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy)
+                router.push(`/pet/${id}/chat`)
+              }}
               className='w-30 h-15 bg-accent p-3 text-center rounded-2xl'>
               <Text className='text-secondary font-galindo'>Plan a visit!</Text>
             </TouchableOpacity>
