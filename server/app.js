@@ -23,5 +23,6 @@ app.use(express.json());
 app.use('/auth', require('./routes/auth'));
 app.use('/user', require('./routes/users'));
 app.use('/pets', require('./routes/pets'));
+app.use('/chat', require('./routes/chatbot'));
 
 module.exports = app;

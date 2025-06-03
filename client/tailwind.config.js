@@ -17,6 +17,9 @@ module.exports = {
         montserrat700:[
           'Montserrat_700Bold'
         ],
+        montserrat600:[
+          'Montserrat_600SemiBold'
+        ],
         montserrat900:[
           'Montserrat_900Black'
         ],
