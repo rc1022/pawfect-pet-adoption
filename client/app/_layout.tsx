@@ -8,6 +8,7 @@ import { useFonts as useGaeguFonts, Gaegu_700Bold } from '@expo-google-fonts/gae
 import { 
   useFonts as useMontserratFonts, 
   Montserrat_400Regular,  
+  Montserrat_600SemiBold,
   Montserrat_700Bold,  
   Montserrat_900Black 
 } from '@expo-google-fonts/montserrat';
@@ -20,6 +21,7 @@ export default function RootLayout() {
   
   const [montserratLoaded] = useMontserratFonts({
     Montserrat_400Regular,
+    Montserrat_600SemiBold,
     Montserrat_700Bold,
     Montserrat_900Black
   });

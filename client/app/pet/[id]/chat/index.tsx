@@ -39,10 +39,10 @@ const ChatScreen = () => {
   const [loading, setLoading] = useState(false);
 
   // Ref for the FlatList to enable auto-scrolling to the bottom
-  const flatListRef = useRef(null);
+  const flatListRef = useRef<FlatList<any>>(null);
 
   // Initial greeting from Hunter (bot) based on the detailed persona
-  const initialHunterIntro = `Hi there! I'm ${botDisplayName}, a positive, shy, and energetic Mongrel. I'm here to help you get ready for pet adoption, both mentally and physically. Shall we begin?`;
+  const initialHunterIntro = `Hi there! I'm ${botDisplayName}. I'm here to help you get ready for pet adoption!`;
 
   // Effect to set the initial greeting when the component mounts
   useEffect(() => {
@@ -133,25 +133,11 @@ const ChatScreen = () => {
   const renderItem = ({ item }: { item: Message }) => {
     const isUser = item.sender === 'user';
     return (
-      <View
-        style={{
-          flexDirection: isUser ? 'row-reverse' : 'row',
-          alignItems: 'flex-end',
-          marginVertical: 4,
-        }}
-      >
+      <View className={`flex items-end my-1 ${isUser ? 'flex-row-reverse' : 'flex-row'}`} >
         {/* Avatar */}
         <Image
           source={{ uri: isUser ? USER_AVATAR : BOT_AVATAR }}
-          style={{
-            width: 36,
-            height: 36,
-            borderRadius: 18,
-            marginHorizontal: 8,
-            borderWidth: 1,
-            borderColor: '#EA5E41',
-            backgroundColor: '#fff',
-          }}
+          className="w-9 h-9 rounded-full mx-2 border border-accent bg-white"
         />
         {/* Message bubble */}
         <View
@@ -159,20 +145,10 @@ const ChatScreen = () => {
             "rounded-2xl px-4 py-2 my-1 max-w-[80%]",
             isUser
               ? "self-end bg-accent"
-              : "self-start bg-primary border border-accent"
+              : "self-start bg-white"
           ].join(" ")}
         >
-          {item.sender === 'bot' && (
-            <Text className="font-bold text-sm text-secondary mb-1">
-              {botDisplayName}
-            </Text>
-          )}
-          <Text
-            className={[
-              "text-base",
-              isUser ? "text-secondary font-montserrat700" : "text-secondary font-gaegu"
-            ].join(" ")}
-          >
+          <Text className="font-montserrat600 leading-normal text-secondary">
             {item.text}
           </Text>
           <Text className="text-xs text-secondary mt-1 text-right font-montserrat400">
@@ -193,16 +169,15 @@ const ChatScreen = () => {
       {/* Header with app name */}
       <SafeAreaView className='w-full flex flex-row items-center bg-secondary'
         edges={['top', 'left', 'right']}>
-        {/* <Text className='pl-5 font-galindo text-primary text-3xl pb-2'>
-          Prepare for adoption
-        </Text> */}
       </SafeAreaView>
 
-      <View className='flex justify-center items-center p-2'>
+      <View className='flex justify-center items-center mt-4'>
         <Image
             source={{ uri: BOT_AVATAR }}
-            className='w-[200px] h-[200px] rounded-full border-4 border-accent'
+            className='w-[170px] h-[170px] rounded-full'
           />
+
+        <Text className='font-galindo text-3xl text-secondary pt-4'> {pet.name} </Text>
       </View> 
       {/* Chat messages list */}
       <FlatList
