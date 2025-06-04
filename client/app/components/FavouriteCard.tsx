@@ -22,7 +22,8 @@ const FavouriteCard = ({ pet, width, onPressFavourite }: FavouriteCardProps) => 
 
   return (
     <TouchableOpacity
-      className="self-start m-2 rounded-2xl bg-[#f9f6f2] shadow-lg" /* dynamic width */
+      className="self-start m-2 rounded-2xl bg-primary shadow-sm"
+      style={{ width }}
       activeOpacity={0.9}
       onPress={() => {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy)

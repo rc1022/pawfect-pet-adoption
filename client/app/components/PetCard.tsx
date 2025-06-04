@@ -10,6 +10,7 @@ type PetCardProps = {
     isFavourite: boolean;
     onToggleFavourite: (sourceId: string) => void;
     width?: number;
+    height?: number;
 };
 
 const getSimpleGender = (gender: string) => {
@@ -25,7 +26,7 @@ const getEnglishName = (name: string) => {
   return match ? match.join(' ').trim() : '';
 };
 
-const PetCard = ({ pet, isFavourite, onToggleFavourite, width }: PetCardProps) => {
+const PetCard = ({ pet, isFavourite, onToggleFavourite, width, height }: PetCardProps) => {
 
   const doubleTap = Gesture.Tap()
     .numberOfTaps(2)
@@ -38,35 +39,50 @@ const PetCard = ({ pet, isFavourite, onToggleFavourite, width }: PetCardProps) =
 
   return (
     <GestureDetector gesture={doubleTap}>
-      <View className="bg-accent rounded-3xl m-4 shadow-lg" style={width ? { width, alignSelf: 'center' } : undefined}>
-        <View className="w-full h-full rounded-xl bg-[#ffe8df] p-4 max-h-[700px]">
-        <AntDesign className='absolute top-4 right-4' name={isFavourite ? 'heart' : 'hearto'} size={30} color="#ea5e41" />
-
-          <ScrollView 
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            className="mt-4">
-            {pet.photos && pet.photos.length > 0 ? (
-              pet.photos.map((photoUrl, index) => (
-                <Image
-                  key={photoUrl + index}
-                  source={{ uri: photoUrl }}
-                  className="w-[300px] h-[300px] mr-4 rounded-full mt-16"
-                  resizeMode="cover"
-                />
-              ))
-            ) : (
-              <Text>No photos available</Text>
-            )}
-          </ScrollView>
-          
-          <View className="flex items-center m-5">
-            <Text className="font-galindo text-5xl text-secondary leading-[80px]">{getEnglishName(pet.name)}</Text>
-            <Text className="font-galindo text-xl m-2 text-secondary" >{pet.breed} | {getSimpleGender(pet.gender)} </Text>
-            <Text className="font-galindo text-xl m-2 text-secondary" >Age: {pet.age}</Text>
-            <Text className="font-galindo text-xl m-2 text-secondary" >Shelter: {pet.sourceName}</Text>
+      <View
+        className="bg-accent rounded-3xl m-3 shadow-lg"
+        style={{ width: width || 160, height: height || 240, overflow: 'hidden', position: 'relative' }}
+      >
+        {pet.photos && pet.photos.length > 0 ? (
+          <Image
+            source={{ uri: pet.photos[0] }}
+            style={{ width: '100%', height: '100%' }}
+            className="absolute top-0 left-0 w-full h-full"
+            resizeMode="cover"
+          />
+        ) : (
+          <View className="flex-1 justify-center items-center bg-gray-200">
+            <Text>No photo</Text>
           </View>
-           
+        )}
+        {/* Heart Icon */}
+        <TouchableOpacity
+          onPress={() => onToggleFavourite(pet.sourceId)}
+          style={{ position: 'absolute', top: 12, right: 12, zIndex: 2 }}
+          hitSlop={10}
+        >
+          <AntDesign name={isFavourite ? 'heart' : 'hearto'} size={24} color="#ea5e41" />
+        </TouchableOpacity>
+        {/* Overlay for name and age */}
+        <View
+          style={{
+            position: 'absolute',
+            left: 0,
+            bottom: 0,
+            width: '100%',
+            padding: 10,
+            backgroundColor: 'rgba(0,0,0,0.28)',
+            borderBottomLeftRadius: 24,
+            borderBottomRightRadius: 24,
+          }}
+        >
+          <Text
+            className="font-galindo text-lg"
+            style={{ color: 'white', fontWeight: 'bold', textShadowColor: '#000', textShadowOffset: { width: 0, height: 1 }, textShadowRadius: 2 }}
+            numberOfLines={1}
+          >
+            {getEnglishName(pet.name)}, {pet.age}
+          </Text>
         </View>
       </View>
     </GestureDetector>

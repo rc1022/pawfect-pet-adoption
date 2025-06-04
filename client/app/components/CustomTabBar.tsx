@@ -34,7 +34,7 @@ export default function CustomTabBar({ state }: CustomTabBarProps) {
       </TouchableOpacity>
 
       {/* Center Floating Tab */}
-      <View className="absolute -top-10 left-1/2 -translate-x-1/2 z-20">
+      <View className="absolute -top-10 left-1/2 -translate-x-1/2 z-20 shadow-md">
         <TouchableOpacity
           className="w-28 h-28 rounded-full bg-[#ffe2d7] items-center justify-center"
           onPress={() => {
