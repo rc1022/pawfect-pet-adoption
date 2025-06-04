@@ -28,8 +28,12 @@ export default function Index() {
   // PetCard m-3 class implies 12px margin on each side, so 24px total horizontal margin.
   const petCardContentWidth = ((screenWidth - 30) / 2) - 10;
 
+
+  const getSatableHeight = ( petId: string ) => {
+    return petId.charCodeAt(petId.length - 1) % 2 === 0 ? 220 : 320;
+  }
   return (
-    <View className="flex-1 justify-center items-center">
+    <View className="flex-1 justify-center items-center bg-primary">
       <Header />
       <View className="flex-1 bg-primary" style={{ width: screenWidth - 30 }}>
         {!loading && petData && petData.length > 0 ? (
@@ -47,7 +51,7 @@ export default function Index() {
                       pet={pet}
                       isFavourite={favourites.includes(pet.sourceId)}
                       onToggleFavourite={() => toggleFavourite(pet.sourceId)}
-                      height={Math.random() > 0.5 ? 220 : 320}
+                      height={getSatableHeight(pet._id)}
                       width={petCardContentWidth}
                     />
                   )
@@ -62,7 +66,7 @@ export default function Index() {
                       pet={pet}
                       isFavourite={favourites.includes(pet.sourceId)}
                       onToggleFavourite={() => toggleFavourite(pet.sourceId)}
-                      height={Math.random() > 0.5 ? 220 : 320}
+                      height={getSatableHeight(pet._id)}
                       width={petCardContentWidth}
                     />
                   )
