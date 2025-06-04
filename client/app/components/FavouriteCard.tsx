@@ -22,7 +22,7 @@ const FavouriteCard = ({ pet, width, onPressFavourite }: FavouriteCardProps) => 
 
   return (
     <TouchableOpacity
-      style={{ width, alignSelf: 'flex-start', margin: 8, borderRadius: 16, backgroundColor: '#f9f6f2', shadowColor: '#000', shadowOpacity: 0.1, shadowRadius: 8, elevation: 2 }}
+      className="self-start m-2 rounded-2xl bg-[#f9f6f2] shadow-lg" /* dynamic width */
       activeOpacity={0.9}
       onPress={() => {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy)
@@ -34,7 +34,7 @@ const FavouriteCard = ({ pet, width, onPressFavourite }: FavouriteCardProps) => 
           <Image
             source={{ uri: pet.photos[0] }}
             className="w-full h-[120px]"
-            style={{ resizeMode: 'cover' }}
+            resizeMode='cover'
           />
         ) : (
           <View className="w-full h-[120px] flex justify-center items-center">

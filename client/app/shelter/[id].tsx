@@ -52,7 +52,7 @@ export default function ShelterDetailScreen() {
           <View className="mt-8 mb-4 justify-center items-center h-[180px] w-[180px]">
             <Image
               source={shelter.logo}
-              style={{ width: 140, height: 140 }}
+              className="w-[140px] h-[140px]"
               resizeMode="contain"
             />
           </View>

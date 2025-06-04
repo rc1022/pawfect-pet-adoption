@@ -88,7 +88,7 @@ const pet = () => {
           <AntDesign name="arrowleft" size={24} color="#F7EFE7" />
         </TouchableOpacity>
 
-<View style={{ flex: 1, flexDirection: 'column' }}>
+<View className="flex-1 flex-col">
   <ScrollView
     horizontal
     pagingEnabled
@@ -126,8 +126,7 @@ const pet = () => {
     showsVerticalScrollIndicator={false}
     className="bg-primary rounded-t-[30px] w-full self-center p-6 shadow flex flex-col border-accent border -mt-10">
         <View className="flex-row justify-between items-center mb-2">
-          <Text className="font-galindo text-secondary text-4xl"
-                style={{lineHeight: 50}}
+          <Text className="font-galindo text-secondary text-4xl leadning-[50px]"
           >{pet.name} </Text>
 
             <TouchableOpacity 
