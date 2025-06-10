@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const PET_API = 'http://192.168.50.13:4000/pets'
+const PET_API = 'http://192.168.50.47:4000/pets'
 // const PET_API = 'http://172.20.10.9:4000/pets'
 
 export async function fetchPets() {

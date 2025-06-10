@@ -5,6 +5,7 @@ import { useShelterContext } from '../context/ShelterContext';
 import { ScrollView } from 'react-native-gesture-handler';
 import * as Haptics from 'expo-haptics';
 import { Centre } from '@/interfaces/interfaces';
+import React, { useState } from 'react';
 
 export default function ShelterDetailScreen() {
 
@@ -13,6 +14,8 @@ export default function ShelterDetailScreen() {
     const { shelterData } = useShelterContext();
     const shelter = shelterData.find( s => s.id === id)
     if (!shelter) return <Text>Shelter info missing!</Text>
+
+    const [displayAbout, setDisplayAbout] = useState(false);
 
     const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
@@ -63,11 +66,27 @@ export default function ShelterDetailScreen() {
           </Text>
 
           {/* ABOUT Section */}
-          <View className=" w-11/12 rounded-3xl p-5 mb-6 min-h-[120px] justify-center items-center">
-            <Text className="text-secondary font-montserrat700 text-base text-left opacity-80">
-              {/* Replace this with actual about info if available */}
-              {shelter.about}
+          <View className="w-11/12 rounded-3xl p-5 mb-6 min-h-[120px] justify-center items-center">
+            <Text className="text-[#EA5E41] font-montserrat900 text-lg mb-2 w-full text-left">Story Behind</Text>
+            <Text className="text-secondary font-montserrat700 text-base text-left opacity-80 w-full">
+              {displayAbout
+                ? shelter.about
+                : `${shelter.about?.split(' ').slice(0, 20).join(' ')}${shelter.about?.split(' ').length > 20 ? ' ...' : ''}`}
             </Text>
+            {shelter.about && shelter.about.split(' ').length > 20 && (
+              <TouchableOpacity
+                activeOpacity={0.8}
+                onPress={() => {
+                  setDisplayAbout(prev => !prev);
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+                }}
+                style={{ alignSelf: 'flex-start', marginTop: 8 }}
+              >
+                <Text style={{ color: '#FFA07A', fontFamily: 'Montserrat-Bold', fontSize: 14 }}>
+                  {displayAbout ? 'hide' : 'Read more'}
+                </Text>
+              </TouchableOpacity>
+            )}
           </View>
 
           {/* Buttons */}

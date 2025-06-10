@@ -85,7 +85,7 @@ const PetCard = ({ pet, isFavourite, onToggleFavourite, width, height }: PetCard
   return (
     <GestureDetector gesture={doubleTap}>
       <View
-        className="bg-accent rounded-3xl m-3 shadow-lg overflow-hidden relative"
+        className="rounded-3xl m-3 relative overflow-hidden shadow-black"
         style={{ width: width || 160, height: height || 240 }}
       >
         {pet.photos && pet.photos.length > 0 ? (
@@ -94,7 +94,6 @@ const PetCard = ({ pet, isFavourite, onToggleFavourite, width, height }: PetCard
             pagingEnabled
             showsHorizontalScrollIndicator={false}
             className="absolute top-0 left-0 w-full h-full"
-            style={{ width: '100%', height: '100%' }}
           >
             {pet.photos.map((photo, idx) => (
               <Image
